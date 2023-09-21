@@ -1,28 +1,33 @@
 <template>
   <div class="intro">
-    
+
     <div class="intro-slider">
-      <img v-for="image in images" :key="image"
-      :style="imagePosition"
-    :src=" require(`../assets/images/main/${image}`)"  alt="">
+      <img v-for="image in images" :key="image" :style="imagePosition" :src="require(`../assets/images/main/${image}`)"
+        alt="">
     </div>
     <div class="intro-content">
       <h1>Аренда квартир в Тосно</h1>
       <div class="intro-privilege">
         <div class="intro-privilege-item intro-left">
-          <div class="intro-privilege-text">Низкая стоимость
-            <!-- <div class="full-text">Низкая стоимость</div> -->
+          <div class="intro-privilege-text" @click="showPrivilege(0)">Низкая стоимость
           </div>
-          <div class="intro-privilege-text">Предложения от собственника</div>
+          <div class="intro-privilege-text" @click="showPrivilege(1)">Предложения от собственника</div>
         </div>
         <div class="intro-privilege-btn">
           <button>Смотреть предложения</button>
         </div>
         <div class="intro-privilege-item intro-right">
-          <div class="intro-privilege-text">Низкая стоимость</div>
-          <div class="intro-privilege-text">Предложения от собственника</div>
+          <div class="intro-privilege-text" @click="showPrivilege(2)">Низкая стоимость</div>
+          <div class="intro-privilege-text" @click="showPrivilege(3)">Предложения от собственника</div>
         </div>
       </div>
+      <transition name="modal-fade">
+        <div class="full-text" v-if="isFullShowed">
+          <p>
+            {{ privileges[activePrivilege] }}
+          </p>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -32,38 +37,73 @@ export default {
   name: 'IntroCard',
   props: {
     msg: String
-  }, 
-  data(){
-    return{
-      images: ['1.jpg','2.jpg','3.jpg','4.jpg'],
-      activeImage: 0
+  },
+  data() {
+    return {
+      images: ['1.jpg', '2.jpg', '3.jpg', '4.jpg'],
+      activeImage: 0,
+      privileges: this.$store.state.privileges,
+      activePrivilege: 0,
+      isFullShowed: false
     }
   },
-  computed:{
+  computed: {
     imagePosition() {
       return 'transform:' + 'translateX(-' + this.activeImage * 100 + '%)';
     }
   },
   methods:
   {
-    getNextImage(){
-      setInterval(()=>{
+    showPrivilege(n) {
+      if (this.activePrivilege == n) {
+        if (this.isFullShowed) {
+          this.isFullShowed = false;
+          return
+        }
+      }
+      else {
+        if (this.isFullShowed) {
+          this.isFullShowed = false;
+          setTimeout(() => {
+            this.isFullShowed = true;
+            this.activePrivilege = n;
+          }, 500)
+          return
+        }
+      }
+      this.isFullShowed = true;
+      this.activePrivilege = n;
+    },
+    getNextImage() {
+      setInterval(() => {
         if (this.activeImage < this.images.length - 1) this.activeImage++
         else this.activeImage = 0;
-      },10000);
+      }, 15000);
     },
-    sliderActivate(){
+    sliderActivate() {
       this.getNextImage();
     }
   },
-  mounted(){
+  mounted() {
     this.getNextImage();
+    console.log(this.privileges[0]);
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.modal-fade-leave-to,
+.modal-fade-enter-from {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: all 0.5s ease-in-out;
+}
+
 .intro {
   width: 100vw;
   min-height: 100vh;
@@ -76,7 +116,7 @@ export default {
 
 }
 
-.intro-slider{
+.intro-slider {
   display: flex;
   flex-direction: row;
   overflow: hidden;
@@ -85,7 +125,8 @@ export default {
   max-width: 100vw;
   max-height: 100vh;
 }
-.intro img{
+
+.intro img {
   z-index: 0;
   min-width: 100vw;
   min-height: 100vh;
@@ -94,7 +135,8 @@ export default {
   transition: all 0.8s ease-in-out;
   object-fit: cover;
 }
-.intro h1{
+
+.intro h1 {
   display: block;
   cursor: pointer;
   color: rgb(239, 239, 255);
@@ -102,7 +144,7 @@ export default {
   text-shadow: 3px 3px 10px rgb(66, 107, 125);
 }
 
-.intro-content{
+.intro-content {
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -110,14 +152,15 @@ export default {
   align-items: center;
   width: 100vw;
   height: 100vh;
-  cursor:default;
+  cursor: default;
   position: absolute;
   top: 0;
   left: 0;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.301), rgba(188, 188, 188, 0.162), rgba(0, 0, 0, 0.389));
 }
-.intro-privilege{
-  
+
+.intro-privilege {
+
   display: flex;
   padding: 20px;
   flex-direction: row;
@@ -129,14 +172,15 @@ export default {
 }
 
 
-.intro-privilege-item{
+.intro-privilege-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 100;
   justify-content: center;
 }
 
-.intro-privilege-text{
+.intro-privilege-text {
   padding: 20px;
   display: block;
   width: 100%;
@@ -144,12 +188,18 @@ export default {
   border-radius: 10px;
   color: rgb(97, 73, 29);
   font-weight: bold;
+  z-index: 100;
   backdrop-filter: blur(3px);
-  background-color: rgba(240, 248, 255, 0.626);
   position: relative;
+  transition: all 0.5s ease-in-out;
 }
 
-.intro-privilege-btn button{
+.intro-privilege-text:hover {
+  background-color: rgb(255, 247, 240);
+  box-shadow: 3px 3px 10px rgba(91, 57, 30, 0.322);
+}
+
+.intro-privilege-btn button {
   padding: 20px;
   margin: 50px;
   border-radius: 10px;
@@ -162,20 +212,29 @@ export default {
   border: 1px solid rgba(255, 252, 236, 0.249);
   box-shadow: 3px 3px 10px rgba(255, 229, 156, 0.552);
 }
-.intro-left div{
-  background: linear-gradient(to right, transparent,rgba(255, 255, 255, 0.758), rgba(255, 242, 221, 0.807));
+
+.intro-left div {
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), rgba(255, 242, 221, 0.8));
 }
 
-.intro-right div{
-  background: linear-gradient(to left, transparent,rgba(255, 255, 255, 0.758), rgba(255, 242, 221, 0.807));
+.intro-right div {
+  background: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.8), rgba(255, 242, 221, 0.8));
 }
 
-.full-text{
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  height: 300px;
-  width: 150%;
+.full-text {
+  position: absolute;
+  top: 70%;
+  backdrop-filter: blur(3px);
+  width: 400px;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px rgba(91, 57, 30, 0.322);
+  background: linear-gradient(to top, rgba(255, 242, 221, 0.8), rgba(255, 255, 255, 0.8), rgba(255, 242, 221, 0.8));
+}
 
+.full-text p {
+  color: rgb(70, 50, 12);
+  white-space: pre-line;
 }
 </style>
