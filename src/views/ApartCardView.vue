@@ -1,32 +1,13 @@
 <template>
-  <div class="home">
-    <IntroCard></IntroCard>
-    <div class="apartment-container">
-      <div class="apartment-title">
-        <h2>Квартиры, свободные для заселения</h2>
-      </div>
-      <ul>
-        <li v-for="apartment in apartments" :key="apartment">
-          <apartmentCard :item-info="apartment"></apartmentCard>
-        </li>
-      </ul>
+  <div class="apart">
+    <div class="go-back">
+      <img src="../assets/images/icons/go-back.png" alt="">
     </div>
-    <div class="info">
-      <img src="../assets/images/apartmetns/4.jpg" alt="">
-      <div class="info-content">
-        <div class="info-content-text">
-          <h2>
-            Хотите отдохнуть комфортно?
-          </h2>
-          <p>
-            Мы приглашаем вас искать ваше идеальное жилье на нашем сайте и надеемся, что мы сможем помочь вам сделать ваше
-            пребывание в Тосно комфортным и приятным.
-          </p>
-          <p class="info-content-text-thanks">
-            Не стесняйтесь обращаться к нам с любыми вопросами или запросами.
-            Благодарим вас за ваш интерес и выбор нашего сервиса аренды квартир в Тосно!
-          </p>
-        </div>
+    <div class="slider">
+      <div class="current-image">
+        <template v-for="(image, index) in apartments.images" :key="index">
+          <img src="" alt="">
+        </template>
       </div>
     </div>
   </div>
@@ -34,20 +15,25 @@
 
 
 <script>
-import IntroCard from '@/components/Intro.vue'
-import apartmentCard from '@/components/ApartmentCard.vue'
+/* import IntroCard from '@/components/Intro.vue'
+import apartmentCard from '@/components/ApartmentCard.vue' */
 export default {
-  name: 'HomeView',
+  name: 'ApartCardView',
   components: {
-    IntroCard,
-    apartmentCard
-    /*  HelloWorld */
+/*     IntroCard,
+    apartmentCard */
   },
   data() {
     return {
-      apartments: this.$store.state.apartments
+      apartments: {},
+      itemID : this.$route.params.id
     }
   },
+  computed:{
+  },
+  created(){
+    this.apartments = this.$store.getters.getApartmentByID(this.itemID)
+  }
 }
 </script>
 

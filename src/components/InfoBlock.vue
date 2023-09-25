@@ -140,7 +140,7 @@ export default {
   display: block;
   cursor: pointer;
   color: rgb(239, 239, 255);
-  font-size: 2.2rem;
+  font-size: 2rem;
   text-shadow: 3px 3px 10px rgb(66, 107, 125);
 }
 
@@ -192,7 +192,6 @@ export default {
   backdrop-filter: blur(3px);
   position: relative;
   transition: all 0.5s ease-in-out;
-  font-size: 1rem;
 }
 
 .intro-privilege-text:hover {

@@ -1,25 +1,28 @@
 <template>
   <div class="apartment">
 
-    <div class="apartment-slider">
-      <img :src="require(`../assets/images/apartmetns/${itemInfo.images[0]}`)" alt="">
-    </div>
-    <div class="apartment-description">
-      <div>
-        <h3 class="apartment-name">{{ itemInfo.name }}</h3>
-        <p class="apartment-adress">{{ itemInfo.adress }}</p>
-        <div class="apartment-amenities">
-          <span v-for="(amenities, index) in itemInfo.amenities" :key="index">
-            {{ amenities }}
-            <span class="dot" v-if="index != itemInfo.amenities.length - 1"> • </span>
-          </span>
+    <router-link :to="'/apart-card/' + itemInfo.id">
+      <div class="apartment-slider">
+        <img :src="require(`../assets/images/apartmetns/${itemInfo.images[0]}`)" alt="">
+      </div>
+      <div class="apartment-description">
+        <div>
+          <h3 class="apartment-name">{{ itemInfo.name }}</h3>
+          <p class="apartment-adress">{{ itemInfo.adress }}</p>
+          <div class="apartment-amenities">
+            <span v-for="(amenities, index) in itemInfo.amenities" :key="index">
+              {{ amenities }}
+              <span class="dot" v-if="index != itemInfo.amenities.length - 1"> • </span>
+            </span>
+          </div>
+        </div>
+        <div class="apartment-buy">
+          <p class="apartment-price">{{ itemInfo.price }} ₽ / сутки</p>
+          <button @click.prevent="">Забронировать</button>
         </div>
       </div>
-      <div class="apartment-buy">
-        <p class="apartment-price">{{ itemInfo.price }} ₽ / сутки</p>
-        <button>Забронировать</button>
-      </div>
-    </div>
+    </router-link>
+
   </div>
 </template>
 
@@ -52,15 +55,19 @@ export default {
   margin: 20px;
   margin-top: 0px;
   margin-bottom: 20px;
-  box-shadow: 5px 5px 15px rgba(201, 201, 201, 0.195);
-  cursor: pointer;
   transition: all 0.5s ease-in-out;
 }
 
-.apartment:hover{
+a{
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+.apartment:hover {
   box-shadow: 3px 3px 15px rgba(105, 105, 105, 0.767);
   background-color: rgba(255, 253, 251, 0.807);
 }
+
 .apartment-slider img {
   width: 350px;
   height: calc(100%);
@@ -71,7 +78,7 @@ export default {
   margin: 20px;
   text-align: left;
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
   flex-direction: column;
   height: calc(100% - 50px);
   width: 100%;
@@ -100,7 +107,7 @@ export default {
   font-size: 1.2rem;
 }
 
-.apartment-buy button{
+.apartment-buy button {
   padding: 12px;
   margin-top: 10px;
   font-size: 1.02rem;
