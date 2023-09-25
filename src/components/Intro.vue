@@ -2,8 +2,7 @@
   <div class="intro">
 
     <div class="intro-slider">
-      <img v-for="image in images" :key="image" :style="imagePosition" :src="require(`../assets/images/main/${image}`)"
-        alt="">
+      <ImagesSlider :images="images" :auto="true" :duration="5000"></ImagesSlider>
     </div>
     <div class="intro-content">
       <h1>Аренда квартир в Тосно</h1>
@@ -14,7 +13,7 @@
           <div class="intro-privilege-text" @click="showPrivilege(1)">Предложения от собственника</div>
         </div>
         <div class="intro-privilege-btn">
-          <button>Смотреть предложения</button>
+          <button @click="toAparts">Смотреть предложения</button>
         </div>
         <div class="intro-privilege-item intro-right">
           <div class="intro-privilege-text" @click="showPrivilege(2)">Низкая стоимость</div>
@@ -33,27 +32,32 @@
 </template>
 
 <script>
+import ImagesSlider from '@/components/Slider.vue'
+
 export default {
   name: 'IntroCard',
+  components: {
+    ImagesSlider
+  },
   props: {
     msg: String
   },
   data() {
     return {
       images: ['1.jpg', '2.jpg', '3.jpg', '4.jpg'],
-      activeImage: 0,
       privileges: this.$store.state.privileges,
       activePrivilege: 0,
       isFullShowed: false
     }
   },
   computed: {
-    imagePosition() {
-      return 'transform:' + 'translateX(-' + this.activeImage * 100 + '%)';
-    }
   },
   methods:
   {
+    toAparts() {
+      let scrollDiv = window.innerHeight
+      window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+    },
     showPrivilege(n) {
       if (this.activePrivilege == n) {
         if (this.isFullShowed) {
@@ -74,18 +78,8 @@ export default {
       this.isFullShowed = true;
       this.activePrivilege = n;
     },
-    getNextImage() {
-      setInterval(() => {
-        if (this.activeImage < this.images.length - 1) this.activeImage++
-        else this.activeImage = 0;
-      }, 15000);
-    },
-    sliderActivate() {
-      this.getNextImage();
-    }
   },
   mounted() {
-    this.getNextImage();
     console.log(this.privileges[0]);
   }
 }
@@ -118,22 +112,14 @@ export default {
 
 .intro-slider {
   display: flex;
-  flex-direction: row;
-  overflow: hidden;
-  min-width: 100vw;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
-  max-width: 100vw;
   max-height: 100vh;
-}
-
-.intro img {
-  z-index: 0;
   min-width: 100vw;
-  min-height: 100vh;
   max-width: 100vw;
-  max-height: 100vh;
-  transition: all 0.8s ease-in-out;
-  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
 }
 
 .intro h1 {
@@ -209,18 +195,19 @@ export default {
   font-size: 1.1rem;
   cursor: pointer;
   color: rgb(252, 238, 213);
-  background: linear-gradient(to right, rgba(253, 170, 55, 0.749),rgba(255, 107, 27, 0.919), rgb(255, 177, 44));
-  background-size:200% 100%;
+  background: linear-gradient(to right, rgba(253, 170, 55, 0.749), rgba(255, 107, 27, 0.919), rgb(255, 177, 44));
+  background-size: 200% 100%;
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 252, 236, 0.249);
   box-shadow: 3px 3px 10px rgba(255, 229, 156, 0.552);
 }
 
-.intro-privilege-btn button:hover{
+.intro-privilege-btn button:hover {
   background-position: 100% 100%;
   box-shadow: 3px 3px 10px rgba(255, 175, 134, 0.784);
   color: white;
 }
+
 .intro-left div {
   background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), rgba(255, 242, 221, 0.8));
 }

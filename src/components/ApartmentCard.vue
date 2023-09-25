@@ -10,15 +10,15 @@
           <h3 class="apartment-name">{{ itemInfo.name }}</h3>
           <p class="apartment-adress">{{ itemInfo.adress }}</p>
           <div class="apartment-amenities">
-            <span v-for="(amenities, index) in itemInfo.amenities" :key="index">
+            <span v-for="(amenities, index) in itemInfo.amenities.min" :key="index">
               {{ amenities }}
-              <span class="dot" v-if="index != itemInfo.amenities.length - 1"> • </span>
+              <span class="dot" v-if="index != itemInfo.amenities.min.length - 1"> • </span>
             </span>
           </div>
         </div>
         <div class="apartment-buy">
           <p class="apartment-price">{{ itemInfo.price }} ₽ / сутки</p>
-          <button @click.prevent="">Забронировать</button>
+          <!-- <button @click.prevent="">Забронировать</button> -->
         </div>
       </div>
     </router-link>
@@ -62,6 +62,7 @@ a{
   display: flex;
   flex-direction: row;
   margin: 0;
+  width: 100%;
 }
 .apartment:hover {
   box-shadow: 3px 3px 15px rgba(105, 105, 105, 0.767);
@@ -102,8 +103,9 @@ a{
 
 .apartment-price {
   display: flex;
-  justify-self: flex-end;
+  justify-self: flex-start;
   font-weight: bold;
+  transform: translateY(-250%);
   font-size: 1.2rem;
 }
 
