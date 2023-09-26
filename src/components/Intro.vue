@@ -1,6 +1,9 @@
 <template>
   <div class="intro">
-
+    <div class="tel">
+      <img src="../assets/images/icons/tel.png" alt="">
+      <a href="tel:+78008008888">+7 (800) 800 88-88</a>
+    </div>
     <div class="intro-slider">
       <ImagesSlider :images="images" :auto="true" :duration="5000"></ImagesSlider>
     </div>
@@ -80,13 +83,39 @@ export default {
     },
   },
   mounted() {
-    console.log(this.privileges[0]);
+    
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.tel {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  z-index: 200;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.tel a {
+  color: rgb(255, 255, 255);
+}
+
+.tel img {
+  width: 25px;
+  height: 25px;
+  margin-right: 15px;
+  box-shadow: 0px 0px 10px white;
+  background-color: rgba(255, 255, 255, 0.608);
+  border-radius: 50%;
+}
+
 .modal-fade-leave-to,
 .modal-fade-enter-from {
   opacity: 0;
@@ -125,9 +154,9 @@ export default {
 .intro h1 {
   display: block;
   cursor: pointer;
-  color: rgb(239, 239, 255);
+  color: rgb(255, 255, 255);
   font-size: 2.2rem;
-  text-shadow: 3px 3px 10px rgb(66, 107, 125);
+  text-shadow: 3px 3px 10px rgba(252, 238, 225, 0.877);
 }
 
 .intro-content {

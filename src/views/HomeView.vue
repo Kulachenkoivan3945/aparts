@@ -29,6 +29,16 @@
         </div>
       </div>
     </div>
+    <!-- <div class="services">
+      <div class="services-text">
+        <h2>Дополнительные услуги</h2>
+        <p>Воспользуйтесь дополнительным сервисом для более приятного и комфортного отдыха</p>
+      </div>
+      <div class="services-text">
+        <h2>Дополнительные услуги</h2>
+        <p>Воспользуйтесь дополнительным сервисом для более приятного и комфортного отдыха</p>
+      </div>
+    </div> -->
   </div>
 </template>
 
@@ -132,5 +142,24 @@ export default {
   background: linear-gradient(45deg, #363636, #626262, #242424);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.services{
+  width: 100vw;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+}
+
+.services-text{
+  width: 300px;
+  text-align: left;
+  line-height: 1.5rem;
+}
+.services h2{
+  font-size: 1.4rem;
+  margin-bottom: 20px;
 }
 </style>

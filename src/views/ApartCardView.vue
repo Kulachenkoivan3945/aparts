@@ -67,8 +67,8 @@
             <p v-else>Без питомцев</p>
           </li>
           <li class="passport">
-            <p v-if="apartment.rules.passport">Паспорт не обязателен</p>
-            <p v-else>Заселение по паспорту</p>
+            <p v-if="apartment.rules.passport">Заселение по паспорту</p>
+            <p v-else>Паспорт не обязателен</p>
           </li>
         </ul>
 
