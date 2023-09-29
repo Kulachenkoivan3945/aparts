@@ -1,9 +1,9 @@
 <template>
-<!--   <nav>
+  <!--   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </nav> -->
-  <router-view/>
+  <router-view />
 </template>
 
 <style>
@@ -25,7 +25,7 @@
   color: #2c3e50;
 }
 
-*{
+* {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -46,11 +46,21 @@ p {
   font-size: 1rem;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
+@media (max-width: 800px) {
+  html {
+    font-size: 14px;
+  }
 
+}
 
+@media (max-width: 400px) {
+  html {
+    font-size: 12px;
+  }
 
+}
 </style>

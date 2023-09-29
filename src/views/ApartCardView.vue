@@ -6,10 +6,11 @@
         <p>На главную</p>
       </div>
       <div class="slider">
-        <ImagesSlider :images="apartment.images" :auto="false" :duration="5000" :control="true"></ImagesSlider>
+        <ImagesSlider :images="apartment.images" :imagesLocation="'apartmetns'" :auto="false" :duration="5000"
+          :control="true"></ImagesSlider>
       </div>
       <div class="info text-block">
-        <h2>{{ apartment.name }} <span>{{ apartment.size }}м<sup>2</sup></span></h2>
+        <h2><span class="info-h2">{{ apartment.name }}</span> <span>{{ apartment.size }}м<sup>2</sup></span></h2>
         <ul>
           <li>
             Гостей: {{ apartment.guestsCount }}
@@ -134,7 +135,7 @@
 
       <div class="owner text-block">
         <h2>Владелец : Константин</h2>
-        <h3>По всем вопросам обращаться по номеру телефона <span>8 800 880 88 88</span></h3>
+        <h3><span class="owner-h3">По всем вопросам обращаться по номеру телефона</span> <span class="owner-tel">8 800 880 88 88</span></h3>
         <p>Не стесняйтесь обращаться к нам с любыми вопросами или запросами</p>
       </div>
     </div>
@@ -228,8 +229,8 @@ export default {
   margin-bottom: 10px;
 }
 
-.info h2 span {
-  margin-left: 20px;
+.info-h2 {
+  margin-right: 20px;
 }
 
 .info ul {
@@ -313,6 +314,7 @@ export default {
 .amenities-main li {
   list-style: disc;
   margin-left: 15px;
+  margin-right: 15px;
 }
 
 
@@ -320,6 +322,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
+  gap: 15px;
 }
 
 .amenities-all h3 {
@@ -337,12 +340,79 @@ export default {
   margin-bottom: 20px;
 }
 
-.owner span {
-  margin-left: 15px;
+.owner-h3 {
+  margin-right: 15px;
+  color: black !important;
+  white-space: none !important;
+}
+
+.owner-tel {
   color: rgb(12, 0, 142);
+  white-space: nowrap;
 }
 
 .owner p {
   padding-top: 10px;
 }
+
+
+@media (max-width: 900px) {
+  .apartment {
+    width: 85%;
+  }
+
+  .slider {
+    height: calc(85vw / 1.9);
+  }
+}
+
+@media (max-width: 750px) {
+  .time {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .time span {
+    margin-top: 5px;
+  }
+}
+
+
+@media (max-width: 650px) {
+  .apartment {
+    width: 95%;
+  }
+
+  .slider {
+    height: calc(100vw / 1.5);
+  }
+
+  .adress iframe{
+    height: calc(80vw - 40px);
+  }
+}
+
+@media (max-width: 450px) {
+ .amenities ul{
+  grid-template-columns: 1fr;
+ }
+
+}
+
+@media (max-width: 380px) {
+  .info ul {
+    flex-wrap: wrap;
+  }
+  .text-block{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .slider {
+    height: calc(100vw / 1.3);
+  }
+
+}
+
+
 </style>

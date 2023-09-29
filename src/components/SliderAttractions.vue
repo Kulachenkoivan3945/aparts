@@ -1,22 +1,15 @@
 <template>
   <div class="slider">
     <div class="slider-image">
-      <template v-if="!isAttractions">
-        <img v-for="image in images" :key="image" :style="imagePosition" :src="require(`../assets/images/${imagesLocation}/${image}`)"
+      <img v-for="image in images" :key="image" :style="imagePosition" :src="require(`../assets/images/${imagesLocation}/${image}`)"
         alt="">
-      </template>
-      <template v-else>
-        <attractionCard v-for="(image, index) in images" :key="index" :content-position="attractPosition(index)" :style="imagePosition" :item-info="image"></attractionCard>
-        alt="">
-      </template>
     </div>
-    <div class="control" v-if="control" @mouseover="isControlActive=true"
-    @mouseleave="isControlActive=false">
-      <div :class="{'control-hide-left' : !isControlActive}" class="control-left control-btns" @click="getPrevImage">
+    <div class="control" v-if="control">
+      <div class="control-left control-btns" @click="getPrevImage">
         <span class="btn-left-right btn-left-1"></span>
         <span class="btn-left-right btn-left-2"></span>
       </div>
-      <div :class="{'control-hide-right' : !isControlActive}" class="control-right control-btns" @click="getNextImage">
+      <div class="control-right control-btns" @click="getNextImage">
         <span class="btn-left-right btn-right-1"></span>
         <span class="btn-left-right btn-right-2"></span>
       </div>
@@ -28,25 +21,18 @@
 </template>
 
 <script>
-import attractionCard from '@/components/AttractionCard.vue'
-
 export default {
-  name: 'ImagesSlider',
-  components:{
-    attractionCard
-  },
+  name: 'SliderAttractions',
   props: {
     images: Array,
     auto: Boolean,
     duration: Number,
     control: Boolean,
-    imagesLocation: String,
-    isAttractions: Boolean
+    imagesLocation: String
   },
   data() {
     return {
       activeImage: 0,
-      isControlActive: false
     }
   },
   computed: {
@@ -56,10 +42,6 @@ export default {
   },
   methods:
   {
-    attractPosition(index){
-      if(index%2==0) return 'right'
-      else return 'left'
-    },
     getNextImage() {
       if (this.auto) {
         setInterval(() => {
@@ -154,25 +136,16 @@ export default {
 
 .control-left {
   background: linear-gradient(to right, rgba(84, 84, 84, 0.279), transparent);
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
 }
 
 .control-right {
   background: linear-gradient(to left, rgba(84, 84, 84, 0.279), transparent);
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
 }
 
 .control-btns:hover {
+  transform: scale(1.1);
 }
 
-.control-hide-left{
-  transform: translateX(-100%);
-}
-.control-hide-right{
-  transform: translateX(100%);
-}
 .btn-left-right {
   width: 5px;
   height: 25px;

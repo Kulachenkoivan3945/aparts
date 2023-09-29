@@ -5,23 +5,23 @@
       <a href="tel:+78008008888">+7 (800) 800 88-88</a>
     </div>
     <div class="intro-slider">
-      <ImagesSlider :images="images" :auto="true" :duration="5000"></ImagesSlider>
+      <ImagesSlider :images="images" :imagesLocation="'main'" :auto="true" :duration="5000"></ImagesSlider>
     </div>
     <div class="intro-content">
-      <h1>Аренда квартир в Тосно</h1>
+      <h1>Посуточная аренда квартир в Тосно</h1>
       <div class="intro-privilege">
-        <div class="intro-privilege-item intro-left">
+        <!-- <div class="intro-privilege-item intro-left">
           <div class="intro-privilege-text" @click="showPrivilege(0)">Низкая стоимость
           </div>
           <div class="intro-privilege-text" @click="showPrivilege(1)">Предложения от собственника</div>
-        </div>
+        </div> -->
         <div class="intro-privilege-btn">
           <button @click="toAparts">Смотреть предложения</button>
         </div>
-        <div class="intro-privilege-item intro-right">
+   <!--      <div class="intro-privilege-item intro-right">
           <div class="intro-privilege-text" @click="showPrivilege(2)">Низкая стоимость</div>
           <div class="intro-privilege-text" @click="showPrivilege(3)">Предложения от собственника</div>
-        </div>
+        </div> -->
       </div>
       <transition name="modal-fade">
         <div class="full-text" v-if="isFullShowed">
@@ -47,7 +47,7 @@ export default {
   },
   data() {
     return {
-      images: ['1.jpg', '2.jpg', '3.jpg', '4.jpg'],
+      images: ['1.jpg', '2.jpg', '3.jpg', '4.jpg','5.jpg','6.jpg','7.jpg','8.jpg','9.jpg','10.jpg'],
       privileges: this.$store.state.privileges,
       activePrivilege: 0,
       isFullShowed: false
@@ -153,7 +153,8 @@ export default {
 
 .intro h1 {
   display: block;
-  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
   color: rgb(255, 255, 255);
   font-size: 2.2rem;
   text-shadow: 3px 3px 10px rgba(252, 238, 225, 0.877);
@@ -182,7 +183,6 @@ export default {
   align-items: center;
   justify-content: center;
   width: 100%;
-  cursor: pointer;
   height: auto;
 }
 
@@ -217,7 +217,7 @@ export default {
 
 .intro-privilege-btn button {
   padding: 20px;
-  margin: 50px;
+  margin-top: 50px;
   transition: all 0.5s ease-in-out;
   border-radius: 10px;
   font-weight: bold;

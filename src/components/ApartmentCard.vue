@@ -55,6 +55,7 @@ export default {
   margin-top: 0px;
   margin-bottom: 20px;
   transition: all 0.5s ease-in-out;
+  background-color: rgb(255, 255, 255);
 }
 
 a{
@@ -117,4 +118,68 @@ a{
   background-color: rgba(104, 193, 90, 0.832);
   color: white;
 }
+
+@media (max-width: 1100px) {
+  .apartment-price{
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+
+  .apartment{
+    height: 180px;
+  }
+  .apartment-slider img{
+    width: 250px;
+  }
+}
+
+@media (max-width: 650px) {
+
+  .apartment-amenities{
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .apartment{
+    height: auto;
+    margin: 5px;
+    width: 100%;
+  }
+
+  .apartment img{
+    height: 200px;
+    width: 100%;
+  }
+
+  .apartment-description{
+    width: auto;
+    margin: 10px;
+  }
+  .apartment a{
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .apartment h3{
+    text-align: center;
+  }
+  .apartment p{
+    text-align: center;
+  }
+  .apartment-amenities{
+    text-align: center;
+  }
+
+  .apartment-price{
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+
+}
+
 </style>
