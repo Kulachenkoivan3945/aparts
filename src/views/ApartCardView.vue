@@ -32,7 +32,7 @@
       </div>
       <div class="rules text-block">
         <h2>Правила проживания</h2>
-        <div class="time">
+        <!--   <div class="time">
           <p class="check-in">Заезд
             <br>
             <span>После {{ apartment.rules.checkIn }}</span>
@@ -45,7 +45,7 @@
             <br>
             <span>От {{ apartment.rules.minimalPeriod }} суток</span>
           </p>
-        </div>
+        </div> -->
         <ul class="allows">
           <li>
             <p v-if="apartment.rules.kids">Можно с детьми</p>
@@ -107,19 +107,19 @@
           </li>
 
           <li>
-            <h3>Ванная команата</h3>
+            <h3>Комната</h3>
             <ul>
-              <li v-for="bath in apartment.amenities.bath" :key="bath">
-                <p>{{ bath }}</p>
+              <li v-for="room in apartment.amenities.room" :key="room">
+                <p>{{ room }}</p>
               </li>
             </ul>
           </li>
 
           <li>
-            <h3>Кухня</h3>
+            <h3>Инфраструктура рядом</h3>
             <ul>
-              <li v-for="citchen in apartment.amenities.citchen" :key="citchen">
-                <p>{{ citchen }}</p>
+              <li v-for="infrastructure in apartment.amenities.infrastructure" :key="infrastructure">
+                <p>{{ infrastructure }}</p>
               </li>
             </ul>
           </li>
@@ -129,13 +129,14 @@
       <div class="adress text-block">
         <h2>Адрес : {{ apartment.adress }}</h2>
         <iframe
-          src="https://yandex.ru/map-widget/v1/?um=constructor%3A1dde84448939f3c51ffa01a447ff7431518f1bc8bd93a2c8be7bcf743fb74d2d&amp;source=constructor"
+          :src="apartment.addresSrc"
           frameborder="0"></iframe>
       </div>
 
       <div class="owner text-block">
         <h2>Владелец : Константин</h2>
-        <h3><span class="owner-h3">По всем вопросам обращаться по номеру телефона</span> <span class="owner-tel">8 800 880 88 88</span></h3>
+        <h3><span class="owner-h3">По всем вопросам обращаться по номеру телефона</span> <span class="owner-tel">8 800 880
+            88 88</span></h3>
         <p>Не стесняйтесь обращаться к нам с любыми вопросами или запросами</p>
       </div>
     </div>
@@ -285,7 +286,9 @@ export default {
   font-weight: 600;
 }
 
-.allows {}
+.allows {
+  margin-top: 15px;
+}
 
 .allows li {
   margin-left: 15px;
@@ -306,6 +309,9 @@ export default {
   margin-top: 5px;
 }
 
+.amenities li:first-letter {
+  text-transform: uppercase;
+}
 .amenities-main {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -387,15 +393,15 @@ export default {
     height: calc(100vw / 1.5);
   }
 
-  .adress iframe{
+  .adress iframe {
     height: calc(80vw - 40px);
   }
 }
 
 @media (max-width: 450px) {
- .amenities ul{
-  grid-template-columns: 1fr;
- }
+  .amenities ul {
+    grid-template-columns: 1fr;
+  }
 
 }
 
@@ -403,7 +409,8 @@ export default {
   .info ul {
     flex-wrap: wrap;
   }
-  .text-block{
+
+  .text-block {
     padding-left: 15px;
     padding-right: 15px;
   }
@@ -412,7 +419,4 @@ export default {
     height: calc(100vw / 1.3);
   }
 
-}
-
-
-</style>
+}</style>
