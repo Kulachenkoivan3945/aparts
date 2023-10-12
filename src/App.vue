@@ -6,6 +6,27 @@
   <router-view />
 </template>
 
+<script>
+
+
+export default {
+  name: 'App',
+  components: {
+  },
+  data() {
+    return {
+      
+    }
+  },
+  methods: {
+    
+  },
+  created() {
+   /*  this.$store.dispatch('getPrices');
+    console.log(sessionStorage.getItem("test")); */
+  },
+};
+</script>
 <style>
 @font-face {
   font-family: 'Montserrat';

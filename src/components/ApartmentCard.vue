@@ -3,7 +3,7 @@
 
     <router-link :to="'/apart-card/' + itemInfo.id">
       <div class="apartment-slider">
-        <img :src="require(`../assets/images/apartmetns/${itemInfo.images[0]}`)" alt="">
+        <img :src="require(`../assets/images/apartmetns/${itemInfo.minImage}`)" alt="">
       </div>
       <div class="apartment-description">
         <div>

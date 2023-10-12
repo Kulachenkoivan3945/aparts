@@ -53,7 +53,10 @@
           </li>
           <li>
             <p v-if="apartment.rules.smoking">Можно курить</p>
-            <p v-else>Курение запрещено</p>
+            <template v-else>
+              <p v-if="apartment.rules.balcony">Курение запрещено (включая лоджию)</p>
+              <p v-else>Курение запрещено </p>
+            </template>
           </li>
           <li>
             <p v-if="apartment.rules.party">Подходит для вечеринок</p>
@@ -74,7 +77,7 @@
         </ul>
 
         <p class="deposit">
-          Возвращаемый залог : {{ apartment.rules.deposit }}₽
+          Залог : {{ apartment.rules.deposit }}₽ - возвращаемый
         </p>
       </div>
       <div class="amenities text-block">
@@ -128,16 +131,15 @@
       </div>
       <div class="adress text-block">
         <h2>Адрес : {{ apartment.adress }}</h2>
-        <iframe
-          :src="apartment.addresSrc"
-          frameborder="0"></iframe>
+        <iframe :src="apartment.addresSrc" frameborder="0"></iframe>
       </div>
 
       <div class="owner text-block">
         <h2>Владелец : Константин</h2>
         <h3><span class="owner-h3">По всем вопросам обращаться по номеру телефона</span> <span class="owner-tel">8 800 880
             88 88</span></h3>
-        <p>Не стесняйтесь обращаться к нам с любыми вопросами или запросами</p>
+        <p>Звоните-приезжайте-заселяйтесь! Мы рады новым и постоянным гостям</p>
+        <p>Ждем вашего звонка с 7:00 до 00:00 </p>
       </div>
     </div>
   </div>
@@ -199,12 +201,22 @@ export default {
   align-self: flex-start;
   padding-bottom: 20px;
   cursor: pointer;
+  transition: all 0.5s ease-in-out;
 }
 
 .go-back p {
   margin-left: 15px;
   color: gray;
+  transition: all 0.5s ease-in-out;
 }
+
+.go-back:hover{
+  transform: translateX(-5px);
+}
+.go-back:hover p{
+  color: rgb(23, 6, 58);
+}
+
 
 .slider {
   width: 100%;
@@ -312,6 +324,7 @@ export default {
 .amenities li:first-letter {
   text-transform: uppercase;
 }
+
 .amenities-main {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -419,4 +432,5 @@ export default {
     height: calc(100vw / 1.3);
   }
 
-}</style>
+}
+</style>
